@@ -1,9 +1,9 @@
 let display = document.getElementById("display");
-let history = document.getElementById("history");
 
 function append(value) {
   let current = display.innerText;
 
+  // Prevent double operators
   if (isOperator(value) && isOperator(current.slice(-1))) {
     display.innerText = current.slice(0, -1) + value;
     return;
@@ -18,7 +18,6 @@ function append(value) {
 
 function clearDisplay() {
   display.innerText = "0";
-  history.innerText = "";
 }
 
 function deleteLast() {
@@ -26,30 +25,13 @@ function deleteLast() {
 }
 
 function isOperator(c) {
-  return ["+", "-", "*", "/"].includes(c);
+  return ["+", "-", "*", "/", "%"].includes(c);
 }
 
-// 🔥 Scientific functions
-function scientific(type) {
-  let val = parseFloat(display.innerText);
-
-  switch(type) {
-    case "sin": val = Math.sin(val); break;
-    case "cos": val = Math.cos(val); break;
-    case "tan": val = Math.tan(val); break;
-    case "log": val = Math.log10(val); break;
-    case "sqrt": val = Math.sqrt(val); break;
-    case "square": val = val * val; break;
-  }
-
-  display.innerText = val;
-}
-
-// 🔥 Big.js calculation
+// Big number safe calculation
 function calculate() {
   try {
-    let expr = display.innerText;
-    history.innerText = expr;
+    let expr = display.innerText.replace(/%/g, "/100");
 
     let tokens = expr.match(/(\d+\.?\d*|\+|\-|\*|\/)/g);
     let result = new Big(tokens[0]);
@@ -70,16 +52,3 @@ function calculate() {
     display.innerText = "Error";
   }
 }
-
-// ⌨️ Keyboard support
-document.addEventListener("keydown", (e) => {
-  if (!isNaN(e.key) || "+-*/.".includes(e.key)) {
-    append(e.key);
-  } else if (e.key === "Enter") {
-    calculate();
-  } else if (e.key === "Backspace") {
-    deleteLast();
-  } else if (e.key === "Escape") {
-    clearDisplay();
-  }
-});
