@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ultra Calculator</title>
+  <title>Killer Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Big.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/6.2.1/big.min.js"></script>
@@ -13,44 +14,34 @@
 
 <div class="calculator">
 
-  <div class="history" id="history"></div>
   <div class="display" id="display">0</div>
 
   <div class="buttons">
+    <button class="gray" onclick="clearDisplay()">AC</button>
+    <button class="gray" onclick="deleteLast()">⌫</button>
+    <button class="op" onclick="append('%')">%</button>
+    <button class="op" onclick="append('/')">÷</button>
 
-    <!-- Scientific -->
-    <button onclick="scientific('sin')">sin</button>
-    <button onclick="scientific('cos')">cos</button>
-    <button onclick="scientific('tan')">tan</button>
-    <button onclick="scientific('log')">log</button>
-
-    <button onclick="scientific('sqrt')">√</button>
-    <button onclick="scientific('square')">x²</button>
-    <button onclick="clearDisplay()">AC</button>
-    <button onclick="deleteLast()">⌫</button>
-
-    <!-- Normal -->
     <button onclick="append('7')">7</button>
     <button onclick="append('8')">8</button>
     <button onclick="append('9')">9</button>
-    <button class="op" onclick="append('/')">÷</button>
+    <button class="op" onclick="append('*')">×</button>
 
     <button onclick="append('4')">4</button>
     <button onclick="append('5')">5</button>
     <button onclick="append('6')">6</button>
-    <button class="op" onclick="append('*')">×</button>
+    <button class="op" onclick="append('-')">−</button>
 
     <button onclick="append('1')">1</button>
     <button onclick="append('2')">2</button>
     <button onclick="append('3')">3</button>
-    <button class="op" onclick="append('-')">−</button>
+    <button class="op" onclick="append('+')">+</button>
 
     <button class="zero" onclick="append('0')">0</button>
     <button onclick="append('.')">.</button>
     <button class="equal" onclick="calculate()">=</button>
-    <button class="op" onclick="append('+')">+</button>
-
   </div>
+
 </div>
 
 <script src="script.js"></script>
